@@ -19,7 +19,7 @@ export default function GetAllTranslationsPage() {
 
   const fetchTranslations = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/text-analysis", {
+      const response = await axios.get("https://japanese-nlp-platform-production.up.railway.app/text-analysis", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTranslations(response.data);
@@ -30,7 +30,7 @@ export default function GetAllTranslationsPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:3001/text-analysis/${id}`, {
+      await axios.delete(`https://japanese-nlp-platform-production.up.railway.app/text-analysis/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTranslations(translations.filter((item) => item.id !== id));

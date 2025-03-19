@@ -24,7 +24,7 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/auth/login', {
+            const response = await axios.post('https://japanese-nlp-platform-production.up.railway.app/auth/login', {
                 username,
                 password,
             });

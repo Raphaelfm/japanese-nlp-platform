@@ -14,7 +14,7 @@ export default function TranslationPage() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/text-analysis',
+        'https://japanese-nlp-platform-production.up.railway.app/text-analysis',
         { text },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
