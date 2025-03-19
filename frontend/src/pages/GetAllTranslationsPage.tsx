@@ -42,7 +42,9 @@ export default function GetAllTranslationsPage() {
   return (
     <div className="container mx-auto p-6 text-white">
       <h2 className="text-3xl font-bold mb-4 text-center">All Translations</h2>
-      <div className="overflow-x-auto">
+
+      {/* TABELA PARA DESKTOP */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-gray-800 text-white rounded-lg overflow-hidden shadow-lg">
           <thead>
             <tr className="bg-gray-700">
@@ -78,6 +80,35 @@ export default function GetAllTranslationsPage() {
           </tbody>
         </table>
       </div>
+
+      {/* CARDS PARA MOBILE */}
+      <div className="md:hidden flex flex-col gap-4">
+        {translations.length > 0 ? (
+          translations.map((item) => (
+            <div key={item.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+              <p className="text-lg font-semibold text-gray-300">Original:</p>
+              <p className="mb-2 text-gray-100">{item.text}</p>
+
+              <p className="text-lg font-semibold text-gray-300">Translation:</p>
+              <p className="mb-2 text-gray-100">{item.translated}</p>
+
+              <p className="text-lg font-semibold text-gray-300">Sentiment:</p>
+              <p className="mb-2 text-gray-100">{item.sentiment}</p>
+
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-white flex items-center justify-center gap-2 w-full mt-2"
+              >
+                <FaTrash /> Delete
+              </button>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-300">No translations available</p>
+        )}
+      </div>
+
+      {/* Botão de voltar */}
       <div className="mt-6 text-center">
         <Link to="/translate" className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-lg font-semibold transition-all">
           Back to Translate
