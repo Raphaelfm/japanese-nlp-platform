@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const text_analysis_service_1 = require("./text-analysis.service");
 const text_analysis_controller_1 = require("./text-analysis.controller");
 const prisma_service_1 = require("../../prisma/prisma.service");
-const ai_service_1 = require("../ai/ai.service");
+const ai_service_1 = require("src/ai/ai.service");
 let TextAnalysisModule = class TextAnalysisModule {
 };
 exports.TextAnalysisModule = TextAnalysisModule;
