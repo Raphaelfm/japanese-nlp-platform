@@ -8,15 +8,23 @@ datasource db {
 }
 
 model TextAnalysis {
-  id         Int     @id @default(autoincrement())
-  text       String
-  translated String?
-  sentiment  String?
-  createdAt  DateTime @default(now())
+   id        Int      @id @default(autoincrement())
+  text      String
+  translated String
+  sentiment String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
-  password String
+  id          Int           @id @default(autoincrement())
+  username    String        @unique
+  password    String
+  role        String        @default("USER") // Pode ser 'USER' ou 'ADMIN'
+  translations TextAnalysis[] // Relacionamento com as traduções
+}
+
+enum Role {
+  USER
+  ADMIN
 }

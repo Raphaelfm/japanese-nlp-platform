@@ -5,9 +5,20 @@ import { PrismaService } from '../prisma/prisma.service';
 export class TextAnalysisService {
   constructor(private prisma: PrismaService) {}
 
-  async createAnalysis(text: string, translated: string, sentiment: string) {
+  async createAnalysis(
+    text: string,
+    translated: string,
+    sentiment: string,
+    userId: number,
+  ) {
     return this.prisma.textAnalysis.create({
-      data: { text, translated, sentiment },
+      data: { text, translated, sentiment, userId },
+    });
+  }
+
+  async getUserAnalyses(userId: number) {
+    return this.prisma.textAnalysis.findMany({
+      where: { userId },
     });
   }
 
@@ -15,11 +26,17 @@ export class TextAnalysisService {
     return this.prisma.textAnalysis.findMany();
   }
 
-  async deleteAnalysis(id: number): Promise<boolean> {
+  async deleteAnalysis(
+    id: number,
+    userId: number,
+    role: string,
+  ): Promise<boolean> {
     const analysis = await this.prisma.textAnalysis.findUnique({
       where: { id },
     });
-    if (!analysis) return false;
+
+    if (!analysis || (role !== 'ADMIN' && analysis.userId !== userId))
+      return false;
 
     await this.prisma.textAnalysis.delete({ where: { id } });
     return true;

@@ -13,7 +13,11 @@ export class AuthService {
   async validateLogin(username: string, password: string) {
     const user = await this.usersService.findOne(username);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload = { username: user.username, sub: user.id };
+      const payload = {
+        username: user.username,
+        sub: user.id,
+        role: user.role,
+      };
       return { access_token: this.jwtService.sign(payload) };
     }
     throw new UnauthorizedException('Invalid credentials');
