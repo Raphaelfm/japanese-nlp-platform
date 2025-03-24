@@ -5,14 +5,11 @@ import TranslationPage from './pages/TranslationPage';
 import GetAllTranslationsPage from './pages/GetAllTranslationsPage';
 import Navbar from './components/Navbar';
 import { JSX } from 'react';
+import { getToken } from './utils/auth'; // <- novo import
 
-const isAuthenticated = () => {
-  const token = localStorage.getItem('token');
-  return token !== null;
-};
-
+// PrivateRoute com verificação do token válido
 const PrivateRoute = ({ element }: { element: JSX.Element }) => {
-  return isAuthenticated() ? element : <Navigate to="/" replace />;
+  return getToken() ? element : <Navigate to="/" replace />;
 };
 
 function App() {
@@ -21,8 +18,13 @@ function App() {
       <Navbar />
       <div className="flex justify-center items-center flex-grow p-6">
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          {/* Redireciona para /translate se já estiver autenticado */}
+          <Route path="/" element={getToken() ? <Navigate to="/translate" /> : <LoginPage />} />
+
+          {/* Registro continua acessível */}
           <Route path="/register" element={<RegisterPage />} />
+
+          {/* Páginas privadas */}
           <Route path="/translate" element={<PrivateRoute element={<TranslationPage />} />} />
           <Route path="/translations" element={<PrivateRoute element={<GetAllTranslationsPage />} />} />
         </Routes>

@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { handleAuthError } from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
+import API from '../utils/apiRoutes';
 
 export default function TranslationPage() {
   const [text, setText] = useState('');
   const [sentiment, setSentiment] = useState('');
   const [loading, setLoading] = useState(false);
   const [animatedText, setAnimatedText] = useState('');
+  const navigate = useNavigate();
+
 
   const handleTranslate = async () => {
     setLoading(true);
@@ -14,17 +19,18 @@ export default function TranslationPage() {
 
     try {
       const response = await axios.post(
-        'https://japanese-nlp-platform-production.up.railway.app/text-analysis',
+        API.translation.analyze,
         { text },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
-      
+
       setLoading(false);
       animateText(response.data.translated);
       setSentiment(response.data.sentiment);
-    } catch (error) {
+    } catch (error: unknown) {
       setLoading(false);
       console.error('Translation failed', error);
+      handleAuthError(error as AxiosError, navigate);
     }
   };
 

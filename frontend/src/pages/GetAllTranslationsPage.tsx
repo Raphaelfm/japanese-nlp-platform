@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { handleAuthError } from "../utils/auth";
+import API from "../utils/apiRoutes";
 
 export default function GetAllTranslationsPage() {
   interface Translation {
@@ -12,6 +14,7 @@ export default function GetAllTranslationsPage() {
   }
 
   const [translations, setTranslations] = useState<Translation[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTranslations();
@@ -19,23 +22,25 @@ export default function GetAllTranslationsPage() {
 
   const fetchTranslations = async () => {
     try {
-      const response = await axios.get("https://japanese-nlp-platform-production.up.railway.app/text-analysis", {
+      const response = await axios.get( API.translation.getAll, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTranslations(response.data);
     } catch (error) {
       console.error("Error fetching translations", error);
+      handleAuthError(error as AxiosError, navigate);
     }
   };
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`https://japanese-nlp-platform-production.up.railway.app/text-analysis/${id}`, {
+      await axios.delete(API.translation.delete(id), {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTranslations(translations.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting translation", error);
+      handleAuthError(error as AxiosError, navigate);
     }
   };
 

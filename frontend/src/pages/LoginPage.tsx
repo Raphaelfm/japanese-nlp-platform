@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import API from '../utils/apiRoutes';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -24,7 +25,7 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await axios.post('https://japanese-nlp-platform-production.up.railway.app/auth/login', {
+            const response = await axios.post(API.auth.login, {
                 username,
                 password,
             });

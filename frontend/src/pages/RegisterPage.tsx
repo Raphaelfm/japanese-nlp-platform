@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import API from '../utils/apiRoutes';
 
 export default function RegisterPage() {
     const [username, setEmail] = useState('');
@@ -39,7 +40,7 @@ export default function RegisterPage() {
         }
 
         try {
-            await axios.post('https://japanese-nlp-platform-production.up.railway.app/auth/register', { username, password });
+            await axios.post(API.auth.register, { username, password });
             toast.success('Registration successful! Redirecting to Login...', {
                 position: "top-right",
                 autoClose: 2000,
