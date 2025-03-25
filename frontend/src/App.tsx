@@ -5,7 +5,7 @@ import TranslationPage from './pages/TranslationPage';
 import GetAllTranslationsPage from './pages/GetAllTranslationsPage';
 import Navbar from './components/Navbar';
 import { JSX } from 'react';
-import { getToken } from './utils/auth'; // <- novo import
+import { getToken } from './utils/auth';
 
 // PrivateRoute com verificação do token válido
 const PrivateRoute = ({ element }: { element: JSX.Element }) => {
@@ -21,7 +21,7 @@ function App() {
           {/* Redireciona para /translate se já estiver autenticado */}
           <Route path="/" element={getToken() ? <Navigate to="/translate" /> : <LoginPage />} />
 
-          {/* Registro continua acessível */}
+          {/* Paginas acessíveis sem login */}
           <Route path="/register" element={<RegisterPage />} />
 
           {/* Páginas privadas */}
