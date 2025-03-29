@@ -6,6 +6,8 @@ import GetAllTranslationsPage from './pages/GetAllTranslationsPage';
 import Navbar from './components/Navbar';
 import { JSX } from 'react';
 import { getToken } from './utils/auth';
+import GetAllForAdminPage from './pages/GetAllForAdminPage';
+import GetAllUsersPage from './pages/GetAllUsersPage';
 
 // PrivateRoute com verificação do token válido
 const PrivateRoute = ({ element }: { element: JSX.Element }) => {
@@ -27,6 +29,8 @@ function App() {
           {/* Páginas privadas */}
           <Route path="/translate" element={<PrivateRoute element={<TranslationPage />} />} />
           <Route path="/translations" element={<PrivateRoute element={<GetAllTranslationsPage />} />} />
+          <Route path="/allTranslations" element={<PrivateRoute element={<GetAllForAdminPage />} />} />
+          <Route path="/allUsers" element={<PrivateRoute element={<GetAllUsersPage />} />} />
         </Routes>
       </div>
     </div>

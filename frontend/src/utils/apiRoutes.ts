@@ -9,6 +9,10 @@ const API = {
     analyze: `${API_URL}/text-analysis`,
     getAll: `${API_URL}/text-analysis`,
     delete: (id: number) => `${API_URL}/text-analysis/${id}`,
+    getAllForAdmin: `${API_URL}/text-analysis/all`,
+  },
+  user: {
+    getAll: `${API_URL}/auth/users`,
   },
 };
 

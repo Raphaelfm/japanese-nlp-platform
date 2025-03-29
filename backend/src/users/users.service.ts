@@ -28,4 +28,8 @@ export class UsersService {
       data: { username, password: hashedPassword, role },
     })) as User;
   }
+
+  async getAllUsers(): Promise<User[]> {
+    return (await this.prisma.user.findMany()) as User[];
+  }
 }

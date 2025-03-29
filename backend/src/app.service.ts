@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    return 'Wellcome to the tranlations API. To use this application, please access the link: https://japanese-nlp-platform.vercel.app/';
   }
 }

@@ -1,6 +1,5 @@
-// frontend/src/components/Navbar.tsx
 import { Link, useNavigate } from "react-router-dom";
-import { FaSignOutAlt, FaGlobe, FaUserPlus } from "react-icons/fa";
+import { FaSignOutAlt, FaGlobe, FaUserPlus, FaGlobeAsia } from "react-icons/fa";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -34,13 +33,20 @@ export default function Navbar() {
               <FaGlobe className="text-xl" />
               <span className="hidden sm:inline">Translations</span>
             </Link>
+            <Link
+              to="/allTranslations"
+              className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-lg font-semibold transition-all shadow-md w-12 h-12 sm:w-auto sm:h-auto"
+            >
+              <FaGlobeAsia className="text-xl" />
+              <span className="hidden sm:inline">All Translations</span>
+            </Link>
             <button
               onClick={handleLogout}
               className="flex items-center justify-center bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-lg font-semibold transition-all shadow-md w-12 h-12 sm:w-auto sm:h-auto"
             >
               <FaSignOutAlt className="text-xl" />
               <span className="hidden sm:inline">Logout</span>
-            </button>
+            </button>            
           </>
         )}
       </div>
