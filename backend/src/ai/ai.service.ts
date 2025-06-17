@@ -20,7 +20,7 @@ export class AIService {
       prompt = `Você é um tradutor de textos de japonês para inglês. Traduza apenas o que for enviado em japonês e não escreva mais nada além disso, 
       coloque o sentimento marcado com # também, por exemplo Hello World #Neutro, os sentimentos devem ser em inglês, Neutral, Positive ou Negative, apenas(em inglês). Traduza: ${text}`;
     } else {
-      prompt = `Você é um tradutor de inglês/português para japonês da forma mais educada. Traduza apenas o que for enviado em japonês e não escreva mais nada além disso, 
+      prompt = `Você é um tradutor de inglês/português para japonês da forma mais educada. Traduza apenas o que for enviado em japonês e romaji e não escreva mais nada além disso, 
       coloque o sentimento marcado com # também, por exemplo Hello World #Neutro, os sentimentos devem ser em inglês, Neutral, Positive ou Negative, apenas(em inglês). Traduza: ${text}`;
     }
 
